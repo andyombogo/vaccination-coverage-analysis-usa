@@ -1,8 +1,5 @@
-build:
-  docker:
-    web: Dockerfile
+flask
+gunicorn
+pandas
+numpy
 
-run:
-  web: python project.pypyspark==3.3.1
-matplotlib==3.5.1
-seaborn==0.11.2
