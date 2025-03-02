@@ -1,7 +1,8 @@
-flask
-gunicorn
+streamlit
 pandas
 numpy
 pyspark
 matplotlib
 seaborn
+scikit-learn
+plotly  
