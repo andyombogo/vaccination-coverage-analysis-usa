@@ -1,8 +1,7 @@
+import streamlit as st
 import logging
-import os
-from flask import Flask, jsonify
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count, when, isnan, regexp_replace, mean
+from pyspark.sql.functions import col, regexp_replace, mean
 from pyspark.ml.feature import StringIndexer, VectorAssembler
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml import Pipeline
@@ -11,9 +10,7 @@ from pyspark.ml import Pipeline
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize Flask
-app = Flask(__name__)
-
+@st.cache_resource
 def initialize_spark():
     """Initialize Spark session."""
     return SparkSession.builder.appName("VaccinationAnalysis").getOrCreate()
@@ -58,37 +55,40 @@ def train_and_evaluate_model(df):
     logger.info("Model training complete.")
     return "Model trained and saved successfully!"
 
-@app.route("/")
-def home():
-    return "Vaccination Analysis API is Running!"
+# Streamlit UI
+st.title("Vaccination Coverage Analysis")
 
-@app.route("/run-analysis")
-def run_analysis():
-    """Run vaccination data analysis and return insights."""
-    spark = initialize_spark()
+# Load Spark session
+spark = initialize_spark()
+
+# Load data button
+if st.button("Load Data"):
     df = load_data(spark)
-    if df is None:
-        return jsonify({"error": "Failed to load data."})
+    if df:
+        st.success("Data loaded successfully!")
+        st.dataframe(df.limit(5).toPandas())  # Show first 5 rows
+    else:
+        st.error("Failed to load data.")
 
-    df = clean_data(df)
-    avg_vaccination = calculate_average_vaccination(df)
-    return jsonify({
-        "message": "Analysis completed successfully",
-        "average_vaccination_rate": avg_vaccination
-    })
-
-@app.route("/train-model")
-def train_model():
-    """Train a machine learning model."""
-    spark = initialize_spark()
+# Run analysis button
+if st.button("Run Analysis"):
     df = load_data(spark)
-    if df is None:
-        return jsonify({"error": "Failed to load data."})
+    if df:
+        df = clean_data(df)
+        avg_vaccination = calculate_average_vaccination(df)
+        st.success(f"Average Vaccination Rate: {avg_vaccination:.2f}%")
+    else:
+        st.error("Data not loaded!")
 
-    df = clean_data(df)
-    df = prepare_data_for_ml(df)
-    result = train_and_evaluate_model(df)
-    return jsonify({"message": result})
+# Train model button
+if st.button("Train Model"):
+    df = load_data(spark)
+    if df:
+        df = clean_data(df)
+        df = prepare_data_for_ml(df)
+        result = train_and_evaluate_model(df)
+        st.success(result)
+    else:
+        st.error("Data not available for training!")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+
