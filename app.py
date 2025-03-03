@@ -1,18 +1,17 @@
 import logging
 import os
-from flask import Flask, jsonify
+import streamlit as st
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, count, when, isnan, regexp_replace, mean
 from pyspark.ml.feature import StringIndexer, VectorAssembler
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml import Pipeline
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Initialize Flask
-app = Flask(__name__)
 
 def initialize_spark():
     """Initialize Spark session."""
@@ -54,41 +53,44 @@ def train_and_evaluate_model(df):
     classifier = RandomForestClassifier(featuresCol="features", labelCol="Estimate_Int", predictionCol="prediction", maxBins=60)
     pipeline = Pipeline(stages=[classifier])
     model = pipeline.fit(train_data)
-    model.save("vaccination_model")
+    model.write().overwrite().save("vaccination_model")
     logger.info("Model training complete.")
     return "Model trained and saved successfully!"
 
-@app.route("/")
-def home():
-    return "Vaccination Analysis API is Running!"
+# Streamlit app
+st.title("Vaccination Coverage Analysis Among Pregnant Women in the US")
 
-@app.route("/run-analysis")
-def run_analysis():
-    """Run vaccination data analysis and return insights."""
-    spark = initialize_spark()
-    df = load_data(spark)
-    if df is None:
-        return jsonify({"error": "Failed to load data."})
+# Initialize Spark session
+spark = initialize_spark()
 
+# Load data
+df = load_data(spark)
+if df is None:
+    st.error("Failed to load data.")
+else:
+    # Clean data
     df = clean_data(df)
+
+    # Display data
+    st.write("### Data Preview")
+    st.write(df.toPandas().head())
+
+    # Calculate and display average vaccination rate
     avg_vaccination = calculate_average_vaccination(df)
-    return jsonify({
-        "message": "Analysis completed successfully",
-        "average_vaccination_rate": avg_vaccination
-    })
+    st.write(f"### Average Vaccination Rate: {avg_vaccination:.2f}%")
 
-@app.route("/train-model")
-def train_model():
-    """Train a machine learning model."""
-    spark = initialize_spark()
-    df = load_data(spark)
-    if df is None:
-        return jsonify({"error": "Failed to load data."})
+    # Plot vaccination coverage distribution
+    st.write("### Vaccination Coverage Distribution")
+    vaccination_rates = [row["Estimate (%)"] for row in df.select("Estimate (%)").collect()]
+    plt.figure(figsize=(10, 6))
+    sns.histplot(vaccination_rates, kde=True)
+    plt.title("Distribution of Vaccination Coverage (%)")
+    plt.xlabel("Vaccination Rate (%)")
+    plt.ylabel("Frequency")
+    st.pyplot(plt)
 
-    df = clean_data(df)
-    df = prepare_data_for_ml(df)
-    result = train_and_evaluate_model(df)
-    return jsonify({"message": result})
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    # Train and evaluate model
+    if st.button("Train Model"):
+        df_ml = prepare_data_for_ml(df)
+        result = train_and_evaluate_model(df_ml)
+        st.success(result)
