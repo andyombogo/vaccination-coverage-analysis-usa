@@ -2,10 +2,3 @@ streamlit
 pandas
 numpy
 pyspark
-<<<<<<< HEAD
-=======
-matplotlib
-seaborn
-scikit-learn
-plotly  
->>>>>>> 140e75c7b375f13589933f42f498f57e627d132b
