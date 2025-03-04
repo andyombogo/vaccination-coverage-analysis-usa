@@ -1,10 +1,6 @@
-import streamlit as st
 import logging
-<<<<<<< HEAD
 import os
 import streamlit as st
-=======
->>>>>>> 140e75c7b375f13589933f42f498f57e627d132b
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, regexp_replace, mean
 from pyspark.ml.feature import StringIndexer, VectorAssembler
@@ -17,10 +13,6 @@ import seaborn as sns
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-<<<<<<< HEAD
-=======
-@st.cache_resource
->>>>>>> 140e75c7b375f13589933f42f498f57e627d132b
 def initialize_spark():
     """Initialize Spark session."""
     return SparkSession.builder.appName("VaccinationAnalysis").getOrCreate()
@@ -61,7 +53,6 @@ def train_and_evaluate_model(df):
     classifier = RandomForestClassifier(featuresCol="features", labelCol="Estimate_Int", predictionCol="prediction", maxBins=60)
     pipeline = Pipeline(stages=[classifier])
     model = pipeline.fit(train_data)
-<<<<<<< HEAD
     model.write().overwrite().save("vaccination_model")
     logger.info("Model training complete.")
     return "Model trained and saved successfully!"
@@ -103,47 +94,3 @@ else:
         df_ml = prepare_data_for_ml(df)
         result = train_and_evaluate_model(df_ml)
         st.success(result)
-=======
-    model.save("models/vaccination_model")  # Ensure the models folder exists
-    logger.info("Model training complete.")
-    return "Model trained and saved successfully!"
-
-# Streamlit UI
-st.title("Vaccination Coverage Analysis")
-
-# Load Spark session
-spark = initialize_spark()
-
-df = None  # Initialize df to avoid reference errors
-
-# Load data button
-if st.button("Load Data"):
-    df = load_data(spark)
-    if df is not None:
-        st.success("Data loaded successfully!")
-        st.dataframe(df.limit(5).toPandas())  # Show first 5 rows
-    else:
-        st.error("Failed to load data.")
-
-# Run analysis button
-if st.button("Run Analysis"):
-    if df is not None:
-        df = clean_data(df)
-        avg_vaccination = calculate_average_vaccination(df)
-        st.success(f"Average Vaccination Rate: {avg_vaccination:.2f}%")
-    else:
-        st.error("Load the data first!")
-
-# Train model button
-if st.button("Train Model"):
-    if df is not None:
-        df = clean_data(df)
-        df = prepare_data_for_ml(df)
-        result = train_and_evaluate_model(df)
-        st.success(result)
-    else:
-        st.error("Load the data first!")
-
-
-
->>>>>>> 140e75c7b375f13589933f42f498f57e627d132b
