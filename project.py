@@ -19,6 +19,7 @@ def load_data(spark, file_path):
     """Load dataset from CSV file."""
     try:
         df = spark.read.csv(file_path, header=True, inferSchema=True)
+        logger.info("Data loaded successfully")
         return df
     except Exception as e:
         logger.error(f"Error loading data: {e}")
@@ -29,6 +30,7 @@ def clean_data(df):
     df = df.withColumn("Estimate (%)", regexp_replace("Estimate (%)", "[^0-9.]", "").cast("float"))
     df = df.withColumn("Sample Size", col("Sample Size").cast("int"))
     df = df.dropna()
+    logger.info("Data cleaned successfully")
     return df
 
 def exploratory_data_analysis(df):
@@ -94,6 +96,7 @@ def prepare_data_for_ml(df):
     df = df.withColumn("Estimate_Int", col("Estimate (%)").cast("int"))
     assembler = VectorAssembler(inputCols=["Vaccine_Index", "Geography_Index", "Sample Size"], outputCol="features")
     df = assembler.transform(df)
+    logger.info("Data prepared for machine learning")
     return df
 
 def train_and_evaluate_model(df):
@@ -104,13 +107,13 @@ def train_and_evaluate_model(df):
     model = pipeline.fit(train_data)
     predictions = model.transform(test_data)
     predictions.select("Estimate (%)", "Estimate_Int", "prediction", "features").show(5)
-    model.save("vaccination_model")
+    model.write().overwrite().save("vaccination_model")
     logger.info("Pipeline training and evaluation complete.")
 
 def main():
     """Main function to run the analysis."""
     spark = initialize_spark()
-    file_path = "vaccinationcovpw.csv"
+    file_path = "vaccination_data.csv"
     df = load_data(spark, file_path)
     df.printSchema()
     df.show(5)
