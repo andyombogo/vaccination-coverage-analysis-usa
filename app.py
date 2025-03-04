@@ -19,9 +19,14 @@ def initialize_spark():
 
 def load_data(spark):
     """Load dataset from CSV file."""
-    file_path = "data/vaccinationcovpw.csv"  # Ensure the data folder exists
+    file_path = "vaccination_data.csv"  # Ensure the file is in the root directory
+    logger.info(f"Loading data from {file_path}")
+    if not os.path.exists(file_path):
+        logger.error(f"File not found: {file_path}")
+        return None
     try:
         df = spark.read.csv(file_path, header=True, inferSchema=True)
+        logger.info("Data loaded successfully")
         return df
     except Exception as e:
         logger.error(f"Error loading data: {e}")
@@ -32,11 +37,14 @@ def clean_data(df):
     df = df.withColumn("Estimate (%)", regexp_replace("Estimate (%)", "[^0-9.]", "").cast("float"))
     df = df.withColumn("Sample Size", col("Sample Size").cast("int"))
     df = df.dropna()
+    logger.info("Data cleaned successfully")
     return df
 
 def calculate_average_vaccination(df):
     """Calculate mean vaccination rate."""
-    return df.select(mean("Estimate (%)")).collect()[0][0]
+    avg_vaccination = df.select(mean("Estimate (%)")).collect()[0][0]
+    logger.info(f"Average vaccination rate calculated: {avg_vaccination}")
+    return avg_vaccination
 
 def prepare_data_for_ml(df):
     """Prepare data for machine learning."""
@@ -45,6 +53,7 @@ def prepare_data_for_ml(df):
     df = df.withColumn("Estimate_Int", col("Estimate (%)").cast("int"))
     assembler = VectorAssembler(inputCols=["Vaccine_Index", "Geography_Index", "Sample Size"], outputCol="features")
     df = assembler.transform(df)
+    logger.info("Data prepared for machine learning")
     return df
 
 def train_and_evaluate_model(df):
@@ -54,7 +63,7 @@ def train_and_evaluate_model(df):
     pipeline = Pipeline(stages=[classifier])
     model = pipeline.fit(train_data)
     model.write().overwrite().save("vaccination_model")
-    logger.info("Model training complete.")
+    logger.info("Model training complete")
     return "Model trained and saved successfully!"
 
 # Streamlit app
@@ -66,7 +75,7 @@ spark = initialize_spark()
 # Load data
 df = load_data(spark)
 if df is None:
-    st.error("Failed to load data.")
+    st.error("Failed to load data. Check file path and permissions.")
 else:
     # Clean data
     df = clean_data(df)
@@ -94,3 +103,4 @@ else:
         df_ml = prepare_data_for_ml(df)
         result = train_and_evaluate_model(df_ml)
         st.success(result)
+
