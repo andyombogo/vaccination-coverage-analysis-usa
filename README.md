@@ -18,11 +18,12 @@ The data used in this project is sourced from the CDC's Pregnancy Vaccination Co
 - **PySpark**: For data processing and analysis.
 - **Matplotlib**: For data visualization.
 - **Seaborn**: For enhanced data visualization.
+- **Streamlit**: For creating an interactive web application.
 - **Machine Learning**: Using PySpark's MLlib for classification tasks.
 
 ## Project Structure
 
-- `project.py`: The main script that performs data loading, cleaning, EDA, and machine learning.
+- `app.py`: The main script that performs data loading, cleaning, EDA, and machine learning, and serves the Streamlit web application.
 - `requirements.txt`: Lists the Python dependencies required for the project.
 - `Procfile`: Specifies the command to run the application on Heroku.
 - `runtime.txt`: Specifies the Python runtime version.
@@ -49,12 +50,12 @@ The data used in this project is sourced from the CDC's Pregnancy Vaccination Co
 
 ## Usage
 
-1. Run the main script:
+1. Run the Streamlit app:
     ```sh
-    python project.py
+    streamlit run app.py
     ```
 
-2. The script will perform the following tasks:
+2. The app will perform the following tasks:
     - Initialize a Spark session.
     - Load the vaccination coverage data from a CSV file.
     - Clean and preprocess the data.
@@ -64,26 +65,24 @@ The data used in this project is sourced from the CDC's Pregnancy Vaccination Co
 
 ## Deployment
 
-This project can be deployed to Heroku using the provided [Procfile](http://_vscodecontentref_/0) and [heroku.yml](http://_vscodecontentref_/1) for container-based deployment.
+This project can be deployed using Streamlit. Follow the instructions below to deploy the app locally.
 
-1. Create a new Heroku app:
+1. Ensure you have Streamlit installed:
     ```sh
-    heroku create
+    pip install streamlit
     ```
 
-2. Push the code to Heroku:
+2. Run the Streamlit app:
     ```sh
-    git push heroku main
+    streamlit run app.py
     ```
 
 3. Open the app in your browser:
-    ```sh
-    heroku open
-    ```
+    - The app will automatically open in your default web browser. If not, navigate to `http://localhost:8501` to view the app.
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes. mail andyombogo@gmail.com
 
 ## License
 
