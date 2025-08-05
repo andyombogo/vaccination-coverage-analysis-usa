@@ -113,6 +113,3 @@ cython_debug/
 # Spark logs
 spark-warehouse/
 metastore_db/
-
-# CSV files
-*.csv
