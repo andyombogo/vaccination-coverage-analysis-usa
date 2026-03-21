@@ -2,6 +2,15 @@
 
 This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/andyombogo/vaccination-coverage-analysis-usa/tree/master)
+
+## Why this repo is worth using
+
+- Fast deployed experience: the public app uses pandas and Streamlit for quick cold starts.
+- Better exploration flow: filters, KPI cards, trend views, subgroup gap analysis, and CSV export.
+- Reproducible deployment: `render.yaml`, `Dockerfile`, and a consistent Streamlit theme are all included.
+- Deeper analysis preserved: Spark scripts still exist for offline experimentation and model work.
+
 ## What was improved
 
 - Added a dedicated web dashboard in `dashboard.py` with filters, KPIs, trend charts, geography comparisons, and CSV export.
@@ -23,12 +32,14 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 ## Project layout
 
 - `dashboard.py`: Lightweight Streamlit dashboard intended for deployment.
+- `.streamlit/config.toml`: Shared Streamlit theme and server settings.
 - `app.py`: Spark-based command-line summary script.
 - `project.py`: Extended Spark EDA and model-training workflow for local experimentation.
 - `requirements.txt`: Minimal dependencies for the deployed dashboard.
 - `requirements-analysis.txt`: Optional heavier dependencies for Spark analysis.
 - `render.yaml`: Render Blueprint for one-click cloud deployment.
 - `Dockerfile`: Containerized deployment option for Docker-compatible platforms.
+- `LICENSE`: MIT license for reuse and contribution clarity.
 
 ## Local quick start
 
@@ -79,7 +90,7 @@ python project.py
 ## Deploy on Render
 
 1. Push this repository to GitHub.
-2. In Render, choose `New +` and then `Blueprint`.
+2. Click the `Deploy to Render` button above, or in Render choose `New +` and then `Blueprint`.
 3. Connect the GitHub repository and select this project.
 4. Render will detect `render.yaml` and create the web service automatically.
 5. After the build completes, open the generated `.onrender.com` URL.
@@ -94,6 +105,8 @@ services:
     startCommand: streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 ```
 
+If you want a shareable public link, the only missing step is creating the service in a Render account. The live URL is assigned by Render during that first deploy.
+
 ## Deploy with Docker
 
 For any Docker-friendly platform:
@@ -107,6 +120,10 @@ docker run -p 8501:8501 vaccination-coverage-dashboard
 
 - Source: CDC Pregnancy Vaccination Coverage dataset
 - File included in repo: `vaccination_data.csv`
+
+## License
+
+This project is available under the MIT License. See `LICENSE`.
 
 ## Contributing
 
