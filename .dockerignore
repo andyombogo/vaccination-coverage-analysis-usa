@@ -1,0 +1,7 @@
+.git
+.venv
+__pycache__
+artifacts
+vaccination_model
+desktop.ini
+rm

@@ -1,5 +1,3 @@
-streamlit
-pandas
-numpy
-pyspark
+streamlit>=1.47,<2.0
+pandas>=2.2,<3.0
 

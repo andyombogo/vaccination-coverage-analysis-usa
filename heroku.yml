@@ -3,4 +3,4 @@ build:
     web: Dockerfile
 
 run:
-  web: python project.py
+  web: streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT

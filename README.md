@@ -1,94 +1,113 @@
-# Vaccination Coverage Analysis Among Pregnant Women in the US
+# Vaccination Coverage Dashboard for Pregnant Women in the US
 
-This project analyzes vaccination coverage among pregnant women in the United States using data from the [CDC's Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data). The analysis is performed using PySpark for data processing, exploratory data analysis (EDA), and machine learning.
+This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
-## Project Overview
+## What was improved
 
-The goal of this project is to:
-1. Load and clean the vaccination coverage data.
-2. Perform exploratory data analysis (EDA) to understand the data and identify patterns.
-3. Demonstrate machine learning techniques to predict vaccination coverage.
+- Added a dedicated web dashboard in `dashboard.py` with filters, KPIs, trend charts, geography comparisons, and CSV export.
+- Kept the existing Spark scripts for offline analysis instead of forcing heavy PySpark startup in production.
+- Replaced the stale Heroku-oriented deployment path with a Render Blueprint in `render.yaml`.
+- Updated the Docker image so it starts a real web service that binds to `PORT`.
+- Split lightweight deployment dependencies from optional analysis dependencies.
 
-## Data Source
+## Why the previous deployment failed
 
-The data used in this project is sourced from the CDC's Pregnancy Vaccination Coverage dataset, which can be found [here](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
+The old deployment files started `python app.py` or `python project.py`. Those scripts run batch analysis logic, but they do not start an HTTP server or bind to the platform-assigned `PORT`. On platforms such as Heroku or Render, that causes the service to fail health checks or time out during port detection.
 
-## Technologies Used
+This repo now deploys the Streamlit dashboard instead:
 
-- **PySpark**: For data processing and analysis.
-- **Matplotlib**: For data visualization.
-- **Seaborn**: For enhanced data visualization.
-- **Streamlit**: For creating an interactive web application.
-- **Machine Learning**: Using PySpark's MLlib for classification tasks.
+```sh
+streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
+```
 
-## Project Structure
+## Project layout
 
-- `app.py`: The main script that performs data loading, cleaning, EDA, and machine learning, and serves the Streamlit web application.
-- `requirements.txt`: Lists the Python dependencies required for the project.
-- `Procfile`: Specifies the command to run the application on Heroku.
-- `runtime.txt`: Specifies the Python runtime version.
-- `.gitignore`: Specifies files and directories to be ignored by Git.
+- `dashboard.py`: Lightweight Streamlit dashboard intended for deployment.
+- `app.py`: Spark-based command-line summary script.
+- `project.py`: Extended Spark EDA and model-training workflow for local experimentation.
+- `requirements.txt`: Minimal dependencies for the deployed dashboard.
+- `requirements-analysis.txt`: Optional heavier dependencies for Spark analysis.
+- `render.yaml`: Render Blueprint for one-click cloud deployment.
+- `Dockerfile`: Containerized deployment option for Docker-compatible platforms.
 
-## Installation
+## Local quick start
 
 1. Clone the repository:
-    ```sh
-    git clone https://github.com/andyombogo/vaccination-coverage-analysis-usa.git
-    cd vaccination-coverage-analysis-usa
-    ```
 
-2. Create a virtual environment and activate it:
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+   ```sh
+   git clone https://github.com/andyombogo/vaccination-coverage-analysis-usa.git
+   cd vaccination-coverage-analysis-usa
+   ```
 
-3. Install the required dependencies:
-    ```sh
-    pip install -r requirements.txt
-    ```
+2. Create and activate a virtual environment:
 
-## Usage
+   ```sh
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
 
-1. Run the Streamlit app:
-    ```sh
-    streamlit run app.py
-    ```
+   On macOS or Linux:
 
-2. The app will perform the following tasks:
-    - Initialize a Spark session.
-    - Load the vaccination coverage data from a CSV file.
-    - Clean and preprocess the data.
-    - Perform exploratory data analysis (EDA).
-    - Plot various visualizations to understand the data.
-    - Demonstrate machine learning techniques to predict vaccination coverage.
+   ```sh
+   source .venv/bin/activate
+   ```
 
-## Deployment
+3. Install dashboard dependencies:
 
-This project can be deployed using Streamlit. Follow the instructions below to deploy the app locally.
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-1. Ensure you have Streamlit installed:
-    ```sh
-    pip install streamlit
-    ```
+4. Run the dashboard:
 
-2. Run the Streamlit app:
-    ```sh
-    streamlit run app.py
-    ```
+   ```sh
+   streamlit run dashboard.py
+   ```
 
-3. Open the app in your browser:
-    - The app will automatically open in your default web browser. If not, navigate to `http://localhost:8501` to view the app.
+5. Open `http://localhost:8501`.
+
+## Optional Spark analysis workflow
+
+If you want the offline PySpark scripts as well:
+
+```sh
+pip install -r requirements-analysis.txt
+python app.py
+python project.py
+```
+
+## Deploy on Render
+
+1. Push this repository to GitHub.
+2. In Render, choose `New +` and then `Blueprint`.
+3. Connect the GitHub repository and select this project.
+4. Render will detect `render.yaml` and create the web service automatically.
+5. After the build completes, open the generated `.onrender.com` URL.
+
+Render uses this configuration:
+
+```yaml
+services:
+  - type: web
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
+```
+
+## Deploy with Docker
+
+For any Docker-friendly platform:
+
+```sh
+docker build -t vaccination-coverage-dashboard .
+docker run -p 8501:8501 vaccination-coverage-dashboard
+```
+
+## Data source
+
+- Source: CDC Pregnancy Vaccination Coverage dataset
+- File included in repo: `vaccination_data.csv`
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes. mail andyombogo@gmail.com
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Acknowledgements
-
-- The data used in this project is provided by the CDC.
-- Special thanks to the open-source community for providing the tools and libraries used in this project.
+Issues and pull requests are welcome. For collaboration or questions, contact `andyombogo@gmail.com`.

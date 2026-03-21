@@ -1,17 +1,16 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.9-slim
+FROM python:3.11-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container
-COPY requirements.txt .
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
-# Install the dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
 COPY . .
 
-# Command to run the application
-CMD ["python", "project.py"]
+EXPOSE 8501
+
+CMD ["sh", "-c", "streamlit run dashboard.py --server.address 0.0.0.0 --server.port ${PORT:-8501}"]
