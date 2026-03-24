@@ -30,12 +30,17 @@ This repository now ships with a deployment-ready Streamlit dashboard for explor
 
 ## Screenshots
 
-Add polished screenshots in [docs/screenshots/README.md](docs/screenshots/README.md) using the live app:
+These README previews are based on the strongest views from the live app:
 
-- Overview with KPI cards and trend chart
-- Geography comparison tab
-- Equity lens with subgroup gaps and confidence intervals
-- Mobile-responsive view
+### Coverage trend
+
+[![Coverage trend preview](docs/assets/coverage-trend-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/#coverage-trend)
+
+### Highest-coverage geographies
+
+[![Highest-coverage geographies preview](docs/assets/geographies-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/#highest-coverage-geographies)
+
+For future README image additions, use the naming guidance in [docs/screenshots/README.md](docs/screenshots/README.md).
 
 ## Project Story
 
@@ -85,6 +90,8 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 - `tests/test_dashboard.py`: Lightweight unit tests for the deployed dashboard logic.
 - `docs/assets/project-banner.svg`: Visual banner for the README and GitHub presentation.
 - `docs/assets/architecture.svg`: Architecture diagram showing the deployed and offline paths.
+- `docs/assets/coverage-trend-preview.svg`: README preview image for the live trend chart view.
+- `docs/assets/geographies-preview.svg`: README preview image for the live geographies tab view.
 - `docs/portfolio-checklist.md`: Suggested next steps for turning the repo into a portfolio-quality project.
 - `docs/screenshots/README.md`: Naming convention and capture guidance for README screenshots.
 - `app.py`: Spark-based command-line summary script.

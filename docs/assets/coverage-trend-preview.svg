@@ -1,0 +1,66 @@
+<svg width="900" height="500" viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="500" fill="#F9FCFD"/>
+  <rect x="18" y="18" width="864" height="464" rx="28" fill="url(#bg)" stroke="#E4EEF1"/>
+  <text x="56" y="84" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700">Coverage trend</text>
+  <rect x="70" y="112" width="700" height="304" rx="18" fill="#FFFFFF" fill-opacity="0.9"/>
+
+  <g stroke="#D7E3E7" stroke-width="1">
+    <line x1="110" y1="140" x2="744" y2="140"/>
+    <line x1="110" y1="178" x2="744" y2="178"/>
+    <line x1="110" y1="216" x2="744" y2="216"/>
+    <line x1="110" y1="254" x2="744" y2="254"/>
+    <line x1="110" y1="292" x2="744" y2="292"/>
+    <line x1="110" y1="330" x2="744" y2="330"/>
+    <line x1="110" y1="368" x2="744" y2="368"/>
+  </g>
+
+  <g fill="#6A7F88" font-family="Arial, Helvetica, sans-serif" font-size="16">
+    <text x="80" y="146">80</text>
+    <text x="80" y="184">70</text>
+    <text x="80" y="222">60</text>
+    <text x="80" y="260">50</text>
+    <text x="80" y="298">40</text>
+    <text x="80" y="336">30</text>
+    <text x="80" y="374">20</text>
+    <text x="135" y="430" transform="rotate(-90 135 430)">Average coverage (%)</text>
+  </g>
+
+  <g fill="#7C8E97" font-family="Arial, Helvetica, sans-serif" font-size="15">
+    <text x="138" y="422" transform="rotate(-90 138 422)">2012</text>
+    <text x="198" y="422" transform="rotate(-90 198 422)">2013</text>
+    <text x="258" y="422" transform="rotate(-90 258 422)">2014</text>
+    <text x="318" y="422" transform="rotate(-90 318 422)">2015</text>
+    <text x="378" y="422" transform="rotate(-90 378 422)">2016</text>
+    <text x="438" y="422" transform="rotate(-90 438 422)">2017</text>
+    <text x="498" y="422" transform="rotate(-90 498 422)">2018</text>
+    <text x="558" y="422" transform="rotate(-90 558 422)">2019</text>
+    <text x="618" y="422" transform="rotate(-90 618 422)">2020</text>
+    <text x="678" y="422" transform="rotate(-90 678 422)">2021</text>
+    <text x="738" y="422" transform="rotate(-90 738 422)">2022</text>
+  </g>
+
+  <text x="336" y="468" fill="#6E7E86" font-family="Georgia, 'Times New Roman', serif" font-size="18">Survey year / influenza season</text>
+
+  <polyline points="140,278 200,228 260,218 320,214 380,202 440,208 500,202 560,188 620,188 680,224 740,224" stroke="#0B67C1" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="140,336 200,268 260,190 320,152 380,116 440,108 500,102 560,94 620,96 680,108 740,102" stroke="#79BDF6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g fill="#0B67C1">
+    <circle cx="140" cy="278" r="4"/><circle cx="200" cy="228" r="4"/><circle cx="260" cy="218" r="4"/><circle cx="320" cy="214" r="4"/><circle cx="380" cy="202" r="4"/><circle cx="440" cy="208" r="4"/><circle cx="500" cy="202" r="4"/><circle cx="560" cy="188" r="4"/><circle cx="620" cy="188" r="4"/><circle cx="680" cy="224" r="4"/><circle cx="740" cy="224" r="4"/>
+  </g>
+  <g fill="#79BDF6">
+    <circle cx="140" cy="336" r="4"/><circle cx="200" cy="268" r="4"/><circle cx="260" cy="190" r="4"/><circle cx="320" cy="152" r="4"/><circle cx="380" cy="116" r="4"/><circle cx="440" cy="108" r="4"/><circle cx="500" cy="102" r="4"/><circle cx="560" cy="94" r="4"/><circle cx="620" cy="96" r="4"/><circle cx="680" cy="108" r="4"/><circle cx="740" cy="102" r="4"/>
+  </g>
+
+  <text x="792" y="160" fill="#6E7E86" font-family="Georgia, 'Times New Roman', serif" font-size="18">Vaccine</text>
+  <circle cx="800" cy="188" r="8" fill="#0B67C1"/>
+  <text x="816" y="194" fill="#667A83" font-family="Georgia, 'Times New Roman', serif" font-size="17">Influenza</text>
+  <circle cx="800" cy="220" r="8" fill="#79BDF6"/>
+  <text x="816" y="226" fill="#667A83" font-family="Georgia, 'Times New Roman', serif" font-size="17">Tdap</text>
+
+  <defs>
+    <linearGradient id="bg" x1="18" y1="18" x2="882" y2="482" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FBFC"/>
+      <stop offset="1" stop-color="#FCFDFC"/>
+    </linearGradient>
+  </defs>
+</svg>
