@@ -1,0 +1,44 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#F7FBFC"/>
+  <text x="84" y="92" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700">Deployment and Data Flow</text>
+  <text x="84" y="132" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="22">A lightweight Streamlit dashboard deployed on Render, backed by a local CDC CSV and optional offline Spark workflows.</text>
+
+  <rect x="84" y="188" width="252" height="132" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="114" y="236" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">GitHub Repo</text>
+  <text x="114" y="274" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">Source code, README, Render blueprint,</text>
+  <text x="114" y="302" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">tests, and portfolio assets.</text>
+
+  <rect x="510" y="188" width="252" height="132" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="548" y="236" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">Render</text>
+  <text x="540" y="274" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">Builds from GitHub and runs</text>
+  <text x="540" y="302" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">the public Streamlit service.</text>
+
+  <rect x="936" y="188" width="252" height="132" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="978" y="236" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">Users</text>
+  <text x="968" y="274" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">Explore the dashboard, filter</text>
+  <text x="968" y="302" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">views, and export results.</text>
+
+  <rect x="84" y="430" width="342" height="170" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="116" y="478" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">Dashboard Runtime</text>
+  <text x="116" y="516" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">`dashboard.py` + Streamlit</text>
+  <text x="116" y="544" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">`requirements.txt` + theme config</text>
+  <text x="116" y="572" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">fast startup for portfolio sharing</text>
+
+  <rect x="470" y="430" width="342" height="170" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="502" y="478" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">Data Layer</text>
+  <text x="502" y="516" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">`vaccination_data.csv`</text>
+  <text x="502" y="544" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">cleaned with pandas at app load</text>
+  <text x="502" y="572" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">confidence intervals parsed for charts</text>
+
+  <rect x="856" y="430" width="332" height="170" rx="24" fill="#FFFFFF" stroke="#D7E8EC" stroke-width="2"/>
+  <text x="888" y="478" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">Offline Analysis</text>
+  <text x="888" y="516" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">`app.py` and `project.py`</text>
+  <text x="888" y="544" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">PySpark workflow kept for local</text>
+  <text x="888" y="572" fill="#496068" font-family="Arial, Helvetica, sans-serif" font-size="20">experimentation and model work</text>
+
+  <path d="M336 254H510" stroke="#0F6D80" stroke-width="8" stroke-linecap="round"/>
+  <path d="M762 254H936" stroke="#0F6D80" stroke-width="8" stroke-linecap="round"/>
+  <path d="M210 320V430" stroke="#D6A62E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M636 320V430" stroke="#D6A62E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1022 320V430" stroke="#D6A62E" stroke-width="8" stroke-linecap="round"/>
+</svg>

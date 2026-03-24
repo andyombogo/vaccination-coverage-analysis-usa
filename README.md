@@ -4,6 +4,7 @@
 
 This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
+[![CI](https://img.shields.io/github/actions/workflow/status/andyombogo/vaccination-coverage-analysis-usa/ci.yml?branch=master&style=for-the-badge&label=CI)](https://github.com/andyombogo/vaccination-coverage-analysis-usa/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Render%20App-0f6d80?style=for-the-badge&logo=render)](https://vaccination-coverage-dashboard.onrender.com/)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/andyombogo/vaccination-coverage-analysis-usa/tree/master)
 
@@ -25,6 +26,7 @@ This repository now ships with a deployment-ready Streamlit dashboard for explor
 - Solves a real deployment problem by separating the lightweight deployed dashboard from heavier local Spark workflows.
 - Presents public health data in a clearer, more interactive format than a notebook or static report.
 - Includes a live cloud deployment, reproducible infrastructure, and a cleaner GitHub presentation path.
+- Adds CI-backed tests so the public app feels maintained, not just uploaded.
 
 ## Screenshots
 
@@ -34,6 +36,28 @@ Add polished screenshots in [docs/screenshots/README.md](docs/screenshots/README
 - Geography comparison tab
 - Equity lens with subgroup gaps and confidence intervals
 - Mobile-responsive view
+
+## Project Story
+
+This project started with a useful dataset and deployment ambition, but the original hosting approach launched batch-style Python scripts instead of a real web service. That made the app fail on platforms that expect an HTTP process bound to `PORT`.
+
+The repo now has a cleaner shape for both hiring managers and collaborators:
+
+- a live Render deployment built from a lightweight Streamlit dashboard
+- preserved Spark scripts for deeper local analysis
+- clearer GitHub documentation and portfolio assets
+- automated CI to keep the deployable path healthy
+
+## Architecture
+
+![Architecture](docs/assets/architecture.svg)
+
+The deployed path is intentionally simple:
+
+- GitHub stores the app, docs, CI workflow, and Render blueprint.
+- Render builds the Python service from `requirements.txt` and `render.yaml`.
+- Streamlit serves the dashboard, reading from the included CDC CSV.
+- Heavier Spark exploration stays available locally through `app.py` and `project.py`.
 
 ## What was improved
 
@@ -57,7 +81,10 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 
 - `dashboard.py`: Lightweight Streamlit dashboard intended for deployment.
 - `.streamlit/config.toml`: Shared Streamlit theme and server settings.
+- `.github/workflows/ci.yml`: GitHub Actions smoke-test workflow for dashboard helpers.
+- `tests/test_dashboard.py`: Lightweight unit tests for the deployed dashboard logic.
 - `docs/assets/project-banner.svg`: Visual banner for the README and GitHub presentation.
+- `docs/assets/architecture.svg`: Architecture diagram showing the deployed and offline paths.
 - `docs/portfolio-checklist.md`: Suggested next steps for turning the repo into a portfolio-quality project.
 - `docs/screenshots/README.md`: Naming convention and capture guidance for README screenshots.
 - `app.py`: Spark-based command-line summary script.
@@ -103,6 +130,16 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
    ```
 
 5. Open `http://localhost:8501`.
+
+## Quality Checks
+
+Run the dashboard helper tests locally:
+
+```sh
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+GitHub Actions runs the same test suite on every push to `master` and on pull requests.
 
 ## Optional Spark analysis workflow
 
