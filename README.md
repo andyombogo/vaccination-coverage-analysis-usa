@@ -1,6 +1,6 @@
 # Vaccination Coverage Dashboard for Pregnant Women in the US
 
-[![Dashboard hero preview](docs/assets/dashboard-hero-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/)
+[![Dashboard hero preview](docs/assets/dashboard-hero-preview.png)](https://vaccination-coverage-dashboard.onrender.com/)
 
 This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
@@ -34,11 +34,11 @@ These README previews are based on the strongest views from the live app:
 
 ### Coverage trend
 
-[![Coverage trend preview](docs/assets/coverage-trend-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/#coverage-trend)
+[![Coverage trend preview](docs/assets/coverage-trend-preview.png)](https://vaccination-coverage-dashboard.onrender.com/#coverage-trend)
 
 ### Highest-coverage geographies
 
-[![Highest-coverage geographies preview](docs/assets/geographies-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/#highest-coverage-geographies)
+[![Highest-coverage geographies preview](docs/assets/geographies-preview.png)](https://vaccination-coverage-dashboard.onrender.com/#highest-coverage-geographies)
 
 For future README image additions, use the naming guidance in [docs/screenshots/README.md](docs/screenshots/README.md).
 
@@ -55,7 +55,7 @@ The repo now has a cleaner shape for both hiring managers and collaborators:
 
 ## Architecture
 
-![Architecture](docs/assets/architecture.svg)
+![Architecture](docs/assets/architecture.png)
 
 The deployed path is intentionally simple:
 
@@ -88,11 +88,12 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 - `.streamlit/config.toml`: Shared Streamlit theme and server settings.
 - `.github/workflows/ci.yml`: GitHub Actions smoke-test workflow for dashboard helpers.
 - `tests/test_dashboard.py`: Lightweight unit tests for the deployed dashboard logic.
-- `docs/assets/dashboard-hero-preview.svg`: Cleaner top-of-README hero image based on the live dashboard.
+- `scripts/generate_readme_assets.py`: Rebuilds the PNG README visuals used on GitHub.
+- `docs/assets/dashboard-hero-preview.png`: Cleaner top-of-README hero image based on the live dashboard.
 - `docs/assets/project-banner.svg`: Alternate visual banner asset for other portfolio surfaces.
-- `docs/assets/architecture.svg`: Architecture diagram showing the deployed and offline paths.
-- `docs/assets/coverage-trend-preview.svg`: README preview image for the live trend chart view.
-- `docs/assets/geographies-preview.svg`: README preview image for the live geographies tab view.
+- `docs/assets/architecture.png`: Architecture diagram showing the deployed and offline paths.
+- `docs/assets/coverage-trend-preview.png`: README preview image for the live trend chart view.
+- `docs/assets/geographies-preview.png`: README preview image for the live geographies tab view.
 - `docs/portfolio-checklist.md`: Suggested next steps for turning the repo into a portfolio-quality project.
 - `docs/screenshots/README.md`: Naming convention and capture guidance for README screenshots.
 - `app.py`: Spark-based command-line summary script.

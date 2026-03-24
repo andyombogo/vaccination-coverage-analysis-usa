@@ -115,3 +115,4 @@ spark-warehouse/
 metastore_db/
 artifacts/
 desktop.ini
+!docs/assets/*.png
