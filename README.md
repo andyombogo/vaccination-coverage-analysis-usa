@@ -1,6 +1,6 @@
 # Vaccination Coverage Dashboard for Pregnant Women in the US
 
-![Project Banner](docs/assets/project-banner.svg)
+[![Dashboard hero preview](docs/assets/dashboard-hero-preview.svg)](https://vaccination-coverage-dashboard.onrender.com/)
 
 This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
@@ -88,7 +88,8 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 - `.streamlit/config.toml`: Shared Streamlit theme and server settings.
 - `.github/workflows/ci.yml`: GitHub Actions smoke-test workflow for dashboard helpers.
 - `tests/test_dashboard.py`: Lightweight unit tests for the deployed dashboard logic.
-- `docs/assets/project-banner.svg`: Visual banner for the README and GitHub presentation.
+- `docs/assets/dashboard-hero-preview.svg`: Cleaner top-of-README hero image based on the live dashboard.
+- `docs/assets/project-banner.svg`: Alternate visual banner asset for other portfolio surfaces.
 - `docs/assets/architecture.svg`: Architecture diagram showing the deployed and offline paths.
 - `docs/assets/coverage-trend-preview.svg`: README preview image for the live trend chart view.
 - `docs/assets/geographies-preview.svg`: README preview image for the live geographies tab view.

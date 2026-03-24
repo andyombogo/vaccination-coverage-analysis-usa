@@ -1,0 +1,25 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="360" fill="#F8FBFC"/>
+  <rect x="8" y="16" width="1184" height="178" rx="24" fill="url(#heroBg)" stroke="#C7DADF"/>
+  <text x="40" y="78" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700">US Maternal Vaccination Coverage Dashboard</text>
+  <text x="40" y="136" fill="#264E5D" font-family="Georgia, 'Times New Roman', serif" font-size="20">Explore CDC vaccination coverage estimates for pregnant women across vaccines, geographies, seasons, and demographic</text>
+  <text x="40" y="170" fill="#264E5D" font-family="Georgia, 'Times New Roman', serif" font-size="20">dimensions. This dashboard is optimized for lightweight cloud deployment and quick policy-oriented exploration.</text>
+
+  <text x="8" y="230" fill="#6F848D" font-family="Georgia, 'Times New Roman', serif" font-size="16">4,322 cleaned records loaded from the CDC pregnancy vaccination coverage dataset.</text>
+
+  <text x="8" y="275" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="18">Records</text>
+  <text x="8" y="332" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="34">4,322</text>
+
+  <text x="404" y="275" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="18">Average coverage</text>
+  <text x="404" y="332" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="34">62.6%</text>
+
+  <text x="808" y="275" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="18">Weighted coverage</text>
+  <text x="808" y="332" fill="#0F3948" font-family="Georgia, 'Times New Roman', serif" font-size="34">61.7%</text>
+
+  <defs>
+    <linearGradient id="heroBg" x1="8" y1="16" x2="1192" y2="194" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E6F0F3"/>
+      <stop offset="1" stop-color="#FFF7E3"/>
+    </linearGradient>
+  </defs>
+</svg>
