@@ -1,8 +1,17 @@
 # Vaccination Coverage Dashboard for Pregnant Women in the US
 
+![Project Banner](docs/assets/project-banner.svg)
+
 This repository now ships with a deployment-ready Streamlit dashboard for exploring maternal vaccination coverage in the United States, backed by the [CDC Pregnancy Vaccination Coverage dataset](https://data.cdc.gov/Pregnancy-Vaccination/Vaccination-Coverage-among-Pregnant-Women/h7pm-wmjc/about_data).
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render%20App-0f6d80?style=for-the-badge&logo=render)](https://vaccination-coverage-dashboard.onrender.com/)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/andyombogo/vaccination-coverage-analysis-usa/tree/master)
+
+## Live Demo
+
+- Public app: https://vaccination-coverage-dashboard.onrender.com/
+- Deployment platform: Render
+- Repo: https://github.com/andyombogo/vaccination-coverage-analysis-usa
 
 ## Why this repo is worth using
 
@@ -10,6 +19,21 @@ This repository now ships with a deployment-ready Streamlit dashboard for explor
 - Better exploration flow: filters, KPI cards, trend views, subgroup gap analysis, and CSV export.
 - Reproducible deployment: `render.yaml`, `Dockerfile`, and a consistent Streamlit theme are all included.
 - Deeper analysis preserved: Spark scripts still exist for offline experimentation and model work.
+
+## Portfolio Highlights
+
+- Solves a real deployment problem by separating the lightweight deployed dashboard from heavier local Spark workflows.
+- Presents public health data in a clearer, more interactive format than a notebook or static report.
+- Includes a live cloud deployment, reproducible infrastructure, and a cleaner GitHub presentation path.
+
+## Screenshots
+
+Add polished screenshots in [docs/screenshots/README.md](docs/screenshots/README.md) using the live app:
+
+- Overview with KPI cards and trend chart
+- Geography comparison tab
+- Equity lens with subgroup gaps and confidence intervals
+- Mobile-responsive view
 
 ## What was improved
 
@@ -33,6 +57,9 @@ streamlit run dashboard.py --server.address 0.0.0.0 --server.port $PORT
 
 - `dashboard.py`: Lightweight Streamlit dashboard intended for deployment.
 - `.streamlit/config.toml`: Shared Streamlit theme and server settings.
+- `docs/assets/project-banner.svg`: Visual banner for the README and GitHub presentation.
+- `docs/portfolio-checklist.md`: Suggested next steps for turning the repo into a portfolio-quality project.
+- `docs/screenshots/README.md`: Naming convention and capture guidance for README screenshots.
 - `app.py`: Spark-based command-line summary script.
 - `project.py`: Extended Spark EDA and model-training workflow for local experimentation.
 - `requirements.txt`: Minimal dependencies for the deployed dashboard.
@@ -106,6 +133,8 @@ services:
 ```
 
 If you want a shareable public link, the only missing step is creating the service in a Render account. The live URL is assigned by Render during that first deploy.
+
+This project is now live at `https://vaccination-coverage-dashboard.onrender.com/`.
 
 ## Deploy with Docker
 
